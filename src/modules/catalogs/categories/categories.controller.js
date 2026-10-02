@@ -1,0 +1,1 @@
+import { createCategorySchema } from "./categories.schema";

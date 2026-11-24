@@ -8,7 +8,11 @@ const app = express();
 app.get('/health', (req, res) => {
     res.status(200).json({ message: "ok" });
 });
+
+app.use(express.json());
+
 app.use(mainRouter);
+
 app.use(notFoundHandler);
 app.use(errorHandler);
 

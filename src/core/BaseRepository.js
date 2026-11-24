@@ -17,7 +17,8 @@ export class BaseRepository {
     }
 
     async create(data, trx) {
-        const ret = await this.query(trx).insert(data).returning('*');
+        // O insert tem a query explicita para não passar o whereNull() na query.
+        const ret = await (trx || this.knex)(this.tableName).insert(data).returning('*');
         return ret[0];
     }
 

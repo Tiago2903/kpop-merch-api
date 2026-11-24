@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-const sccreateCategorySchemahema = z.object({
+const createCategorySchema = z.object({
   name: z.string().trim().nonempty("Nome é obrigatório"),
   description: z
     .string()

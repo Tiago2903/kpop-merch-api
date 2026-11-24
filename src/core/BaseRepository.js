@@ -16,15 +16,18 @@ export class BaseRepository {
         return this.query(trx).where('id', id).first();
     }
 
-    create(data, trx) {
-        return this.query(trx).insert(data);
+    async create(data, trx) {
+        const ret = await this.query(trx).insert(data).returning('*');
+        return ret[0];
     }
 
-    update(id, data, trx) {
-        return this.query(trx).where({ id }).update(data);
+    async update(id, data, trx) {
+        const ret = await this.query(trx).where({ id }).update(data).returning('*');
+        return ret[0];
     }
 
-    softDelete(id, trx) {
-        return this.query(trx).where({ id }).update({ deleted_at: new Date() });
+    async softDelete(id, trx) {
+        const ret = await this.query(trx).where({ id }).update({ deleted_at: new Date() }).returning('*');
+        return ret[0];
     }
 }

@@ -7,9 +7,9 @@ export function up(knex) {
         table.increments('id');
         table.string('name', 100).notNullable();
         table.specificType('description', 'NVARCHAR(MAX)').nullable();
-        table.specificType('created_at', 'DATETIME2').notNullable().defaultTo(knex.raw('GETDATE()'));
-        table.specificType('updated_at', 'DATETIME2').notNullable().defaultTo(knex.raw('GETDATE()'));
-        table.specificType('deleted_at', 'DATETIME2').nullable();
+        table.specificType('createdAt', 'DATETIME2').notNullable().defaultTo(knex.raw('GETDATE()'));
+        table.specificType('updatedAt', 'DATETIME2').notNullable().defaultTo(knex.raw('GETDATE()'));
+        table.specificType('deletedAt', 'DATETIME2').nullable();
     });
 }
 

@@ -5,31 +5,31 @@
 export function up(knex) {
     return knex.schema.createTable('purchase_items', function (table) {
         table.increments('id');
-        table.integer('purchase_id').references('id').inTable('purchases').notNullable();
-        table.specificType('item_type', 'VARCHAR(20)').notNullable().checkIn(['album', 'merch'], 'CK_purchase_items_item_type');
-        table.integer('album_id').references('id').inTable('albums').nullable();
-        table.integer('album_version_id').references('id').inTable('album_versions').nullable();
-        table.integer('merch_item_id').references('id').inTable('merch_items').nullable();
+        table.integer('purchaseId').references('id').inTable('purchases').notNullable();
+        table.specificType('itemType', 'VARCHAR(20)').notNullable().checkIn(['album', 'merch'], 'CK_purchase_items_item_type');
+        table.integer('albumId').references('id').inTable('albums').nullable();
+        table.integer('albumVersionId').references('id').inTable('album_versions').nullable();
+        table.integer('merchItemId').references('id').inTable('merch_items').nullable();
         table.integer('quantity').notNullable().defaultTo(1);
-        table.decimal('unit_price_original', 12, 2).notNullable();
-        table.decimal('unit_price_brl', 12, 2).nullable();
-        table.boolean('is_random_item').notNullable().defaultTo(false);
-        table.string('random_item_actual', 255).nullable();
+        table.decimal('unitPriceOriginal', 12, 2).notNullable();
+        table.decimal('unitPriceBrl', 12, 2).nullable();
+        table.boolean('isRandomItem').notNullable().defaultTo(false);
+        table.string('randomItemActual', 255).nullable();
         table.specificType('notes', 'NVARCHAR(MAX)').nullable();
-        table.specificType('created_at', 'DATETIME2').notNullable().defaultTo(knex.raw('GETDATE()'));
-        table.specificType('updated_at', 'DATETIME2').notNullable().defaultTo(knex.raw('GETDATE()'));
-        table.specificType('deleted_at', 'DATETIME2').nullable();
+        table.specificType('createdAt', 'DATETIME2').notNullable().defaultTo(knex.raw('GETDATE()'));
+        table.specificType('updatedAt', 'DATETIME2').notNullable().defaultTo(knex.raw('GETDATE()'));
+        table.specificType('deletedAt', 'DATETIME2').nullable();
 
         table.check(
-            "(item_type = 'album' AND album_id IS NOT NULL AND album_version_id IS NOT NULL AND merch_item_id IS NULL) OR (item_type = 'merch' AND merch_item_id IS NOT NULL AND album_id IS NULL AND album_version_id IS NULL)",
+            "(itemType = 'album' AND albumId IS NOT NULL AND albumVersionId IS NOT NULL AND merchItemId IS NULL) OR (itemType = 'merch' AND merchItemId IS NOT NULL AND albumId IS NULL AND albumVersionId IS NULL)",
             [],
             'CK_purchase_items_type_consistency'
         );
 
-        table.index(['purchase_id'], 'IX_purchase_items_purchase_id');
-        table.index(['album_id'], 'IX_purchase_items_album_id');
-        table.index(['merch_item_id'], 'IX_purchase_items_merch_item_id');
-        table.index(['purchase_id', 'item_type'], 'IX_purchase_items_lookup');
+        table.index(['purchaseId'], 'IX_purchase_items_purchase_id');
+        table.index(['albumId'], 'IX_purchase_items_album_id');
+        table.index(['merchItemId'], 'IX_purchase_items_merch_item_id');
+        table.index(['purchaseId', 'itemType'], 'IX_purchase_items_lookup');
     });
 }
 

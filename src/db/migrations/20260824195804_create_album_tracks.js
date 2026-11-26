@@ -5,17 +5,17 @@
 export function up(knex) {
     return knex.schema.createTable('album_tracks', function (table) {
         table.increments('id');
-        table.integer('album_id').references('id').inTable('albums').notNullable();
-        table.integer('track_number').notNullable();
+        table.integer('albumId').references('id').inTable('albums').notNullable();
+        table.integer('trackNumber').notNullable();
         table.string('title', 255).notNullable();
-        table.integer('duration_sec').nullable();
-        table.boolean('is_title_track').notNullable().defaultTo(false);
+        table.integer('durationSec').nullable();
+        table.boolean('isTitleTrack').notNullable().defaultTo(false);
         table.specificType('notes', 'NVARCHAR(MAX)').nullable();
-        table.specificType('created_at', 'DATETIME2').notNullable().defaultTo(knex.raw('GETDATE()'));
-        table.specificType('updated_at', 'DATETIME2').notNullable().defaultTo(knex.raw('GETDATE()'));
-        table.specificType('deleted_at', 'DATETIME2').nullable();
+        table.specificType('createdAt', 'DATETIME2').notNullable().defaultTo(knex.raw('GETDATE()'));
+        table.specificType('updatedAt', 'DATETIME2').notNullable().defaultTo(knex.raw('GETDATE()'));
+        table.specificType('deletedAt', 'DATETIME2').nullable();
 
-        table.unique(['album_id', 'track_number'], 'UQ_album_tracks');
+        table.unique(['albumId', 'trackNumber'], 'UQ_album_tracks');
     });
 }
 

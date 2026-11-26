@@ -8,9 +8,9 @@ export function up(knex) {
         table.string('name', 255).notNullable();
         table.string('website', 255).nullable();
         table.specificType('notes', 'NVARCHAR(MAX)').nullable();
-        table.specificType('created_at', 'DATETIME2').notNullable().defaultTo(knex.raw('GETDATE()'));
-        table.specificType('updated_at', 'DATETIME2').notNullable().defaultTo(knex.raw('GETDATE()'));
-        table.specificType('deleted_at', 'DATETIME2').nullable();
+        table.specificType('createdAt', 'DATETIME2').notNullable().defaultTo(knex.raw('GETDATE()'));
+        table.specificType('updatedAt', 'DATETIME2').notNullable().defaultTo(knex.raw('GETDATE()'));
+        table.specificType('deletedAt', 'DATETIME2').nullable();
     });
 }
 

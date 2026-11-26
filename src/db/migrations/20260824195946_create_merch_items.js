@@ -5,18 +5,18 @@
 export function up(knex) {
     return knex.schema.createTable('merch_items', function (table) {
         table.increments('id');
-        table.integer('artist_id').references('id').inTable('artists').notNullable();
-        table.integer('merch_type_id').references('id').inTable('merch_types').notNullable();
+        table.integer('artistId').references('id').inTable('artists').notNullable();
+        table.integer('merchTypeId').references('id').inTable('merch_types').notNullable();
         table.string('name', 255).notNullable();
         table.specificType('description', 'NVARCHAR(MAX)').nullable();
-        table.specificType('image_url', 'NVARCHAR(MAX)').nullable();
+        table.specificType('imageUrl', 'NVARCHAR(MAX)').nullable();
         table.specificType('notes', 'NVARCHAR(MAX)').nullable();
-        table.specificType('created_at', 'DATETIME2').notNullable().defaultTo(knex.raw('GETDATE()'));
-        table.specificType('updated_at', 'DATETIME2').notNullable().defaultTo(knex.raw('GETDATE()'));
-        table.specificType('deleted_at', 'DATETIME2').nullable();
+        table.specificType('createdAt', 'DATETIME2').notNullable().defaultTo(knex.raw('GETDATE()'));
+        table.specificType('updatedAt', 'DATETIME2').notNullable().defaultTo(knex.raw('GETDATE()'));
+        table.specificType('deletedAt', 'DATETIME2').nullable();
 
-        table.index(['artist_id'], 'IX_merch_items_artist_id');
-        table.index(['merch_type_id'], 'IX_merch_items_merch_type_id');
+        table.index(['artistId'], 'IX_merch_items_artist_id');
+        table.index(['merchTypeId'], 'IX_merch_items_merch_type_id');
     });
 }
 

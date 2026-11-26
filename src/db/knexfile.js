@@ -1,5 +1,4 @@
 import { envData } from "../config/env.js";
-import { convertKeysToCamel } from "../core/utils/caseConverter.js";
 
 const baseConfig = {
   client: "mssql",
@@ -16,8 +15,7 @@ const baseConfig = {
   },
   seeds: {
     directory: "./seeds",
-  },
-  postProcessResponse: (result) => convertKeysToCamel(result),
+  }
 };
 
 export default {

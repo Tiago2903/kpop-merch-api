@@ -9,7 +9,7 @@
  * @returns {string}
  */
 export function convertToCamel(string) {
-    return string.replace(/_([a-z])/g, (_, letter) => letter.toUpperCase());
+    return string.replace(/_+([a-z0-9])/g, (_, char) => char.toUpperCase());
 }
 
 /**
